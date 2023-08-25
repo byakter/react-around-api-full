@@ -1,0 +1,17 @@
+.heart {
+  margin-right: 20px;
+  background-color: #fff;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.heart__image:hover {
+  opacity: 0.5;
+  border: #000;
+  cursor: pointer;
+}
+
+.heart_active {
+  background-color: black;
+}
