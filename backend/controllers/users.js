@@ -29,7 +29,7 @@ module.exports.getUserById = (req, res, next) => {
     });
 };
 
-module.exports.getUserDatas = (req, res, next) => {
+module.exports.getUserData = (req, res, next) => {
   const { _id } = req.user;
   User.findById(_id)
     .orFail(() => {

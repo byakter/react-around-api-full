@@ -15,7 +15,7 @@ router.delete('/:id', deleteCard);
 router.post('/', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    link: Joi.link().required().min(2),
+    link: Joi.link().required(),
     owner: Joi.string().required().min(8),
     likes: Joi.required(),
     createdAt: Joi.string().required(),
