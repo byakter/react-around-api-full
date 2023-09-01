@@ -23,27 +23,38 @@ View the preview of the images
 </ul>
 
 <h4>
-a link to repository with the complete React application which uses this API
+ Link to repository with the complete React application which uses this API
 </h4>
 
 https://github.com/byakter/react-around-api-full.git
 
 <h4>
- a link to the website that hosts your API:
+ Link to the website that hosts your API:
 </h4>
 
 https://www.byakter.chickenkiller.com/
 
 <h3>
 Languages & Techniques
-ReactJS
-Express.js
-Node.js
-MongoDB + MongoDB-Atlas
-JWT server Auth
-localStorage
-CSS3
-Git/GitHub
 </h3>
+<ul>
+<li>ReactJS</li>
+<li>Express.js</li>
+<li>Node.js</li>
+<li>MongoDB + MongoDB-Atlas</li>
+<li>JWT server Auth</li>
+<li>localStorage</li>
+<li>CSS3</li>
+<li>Git/GitHub</li>
+</ul>
+
+
+
+
+
+
+
+
+
 
 
