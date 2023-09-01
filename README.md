@@ -9,10 +9,10 @@ This is a project that showcases a social network where users can share, add, re
 
 This application contains hover effects, links and transitions effects. 
 
-Main functionality:
+<h2>Main functionality</h2>
 
-Add, remove or like photos
-Edit the name and the role of the user
+Add, remove or like photos,
+Edit the name and the role of the user,
 View the preview of the images
 User validation
 
