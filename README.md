@@ -22,11 +22,15 @@ View the preview of the images
 <li>User validation</Li>
 </ul>
 
-- a link to repository with the complete React application which uses this API:
+<h4>
+a link to repository with the complete React application which uses this API
+</h4>
 
 https://github.com/byakter/react-around-api-full.git
 
-- a link to the website that hosts your API:
+<h4>
+ a link to the website that hosts your API:
+</h4>
 
 https://www.byakter.chickenkiller.com/
 
