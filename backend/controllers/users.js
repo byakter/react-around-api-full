@@ -1,15 +1,14 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const constants = require('../utils/constants');
+const ERRORS = require('../utils/Errors');
 
 module.exports.getAllUsers = async (req, res, next) => {
   try {
     const usersData = await User.find();
     res.send(usersData);
   } catch (error) {
-    next(error);
-    // res.status(500).send('Server Error');
+    next(new ERRORS.InternalError());
   }
 };
 
@@ -17,8 +16,7 @@ module.exports.getUserById = (req, res, next) => {
   const { id } = req.params;
   User.findById(id)
     .orFail(() => {
-      const err = new Error('No card found with that id');
-      err.name = constants.UserNotFoundError;
+      const err = new ERRORS.NotFoundError('No card found with that id');
       throw err;
     })
     .then((user) => {
@@ -33,8 +31,7 @@ module.exports.getUserData = (req, res, next) => {
   const { _id } = req.user;
   User.findById(_id)
     .orFail(() => {
-      const err = new Error('No card found with that id');
-      err.name = constants.UserNotFoundError;
+      const err = new ERRORS.NotFoundError('No card found with that id');
       throw err;
     })
     .then((user) => {
@@ -52,11 +49,15 @@ module.exports.createUser = async (req, res, next) => {
     } = req.body;
     const hashPassword = await bcrypt.hash(password, 10);
     const createdUser = new User({
-      name, about, avatar, email, hashPassword,
+      name, about, avatar, email, password: hashPassword,
     });
     const saveUser = await createdUser.save();
-    res.send(saveUser);
+    const { password: p, ...user } = saveUser;
+    res.send(user);
   } catch (error) {
+    if (error.code === 11000) {
+      next(new ERRORS.Conflict());
+    }
     next(error);
   }
 };
@@ -96,13 +97,15 @@ module.exports.login = async (req, res, next) => {
     const user = await User.findOne({ email }).select('+password');
 
     if (!user) {
-      return res.status(401).json({ error: 'Authentication failed' });
+      const err = new ERRORS.UnauthorizedError();
+      throw err;
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      return res.status(401).json({ error: 'Authentication failed' });
+      const err = new ERRORS.UnauthorizedError();
+      throw err;
     }
 
     const tokenPayload = {
@@ -113,8 +116,8 @@ module.exports.login = async (req, res, next) => {
       expiresIn: '7d',
     });
 
-    res.json({ token });
+    res.send({ token });
   } catch (error) {
-    next(error);
+    next(new ERRORS.UnauthorizedError());
   }
 };

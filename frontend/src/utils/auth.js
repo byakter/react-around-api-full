@@ -19,7 +19,7 @@ class Auth extends Api{
 }
 
 export const auth = new Auth({
-    baseUrl: "https://register.nomoreparties.co",
+    baseUrl: "https://byakter.chickenkiller.com",
     headers: {
       authorization: "5dce2cef-3614-4677-836d-e6e3b236af3f",
       "Content-Type": "application/json",

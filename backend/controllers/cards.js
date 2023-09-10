@@ -1,12 +1,12 @@
 const Card = require('../models/card');
-const constants = require('../utils/constants');
+const ERRORS = require('../utils/Errors');
 
 module.exports.getCards = async (req, res, next) => {
   try {
     const cardsData = await Card.find();
     res.send(cardsData);
   } catch (err) {
-    next(err);
+    next(new ERRORS.InternalError());
   }
 };
 
@@ -17,7 +17,7 @@ module.exports.createCard = async (req, res, next) => {
     const saveCard = await card.save();
     res.send(saveCard);
   } catch (err) {
-    next(err);
+    next(new ERRORS.InternalError());
   }
 };
 
@@ -25,20 +25,19 @@ module.exports.deleteCard = async (req, res, next) => {
   try {
     const { id } = req.params;
     const card = await Card.findById(id);
-    if (card.owner !== req.user._id) {
-      const err = new Error();
-      err.name = constants.authError;
+    if (String(card.owner) !== req.user._id) {
+      const err = new ERRORS.ForbiddenError();
       throw err;
     }
     const result = await Card.deleteOne({ _id: id });
     if (result.deletedCount !== 1) {
-      const err = new Error();
-      err.name = constants.CardNotFoundError;
+      const err = new ERRORS.NotFoundError();
       throw err;
     }
     res.json({ message: 'Card deleted successfully.' });
   } catch (err) {
-    next(err);
+    if (err.code === 403 || err.code === 404) next(err);
+    else next(new ERRORS.InternalError());
   }
 };
 
@@ -47,8 +46,7 @@ module.exports.addLike = async (req, res, next) => {
     const card = await Card.findById(req.params.cardId);
 
     if (!card) {
-      const err = new Error();
-      err.name = constants.CardNotFoundError;
+      const err = new ERRORS.NotFoundError();
       throw err;
     }
 
@@ -60,10 +58,8 @@ module.exports.addLike = async (req, res, next) => {
 
     res.send(updatedCard);
   } catch (err) {
-    // if ((err.name = constants.CastError)) {
-    //   err.name = constants.ValidationError;
-    // }
-    next(err);
+    if (err.code === 404) next(err);
+    else next(new ERRORS.InternalError());
   }
 };
 
@@ -72,8 +68,7 @@ module.exports.deleteLike = async (req, res, next) => {
     const card = await Card.findById(req.params.cardId);
 
     if (!card) {
-      const err = new Error();
-      err.name = constants.CardNotFoundError;
+      const err = new ERRORS.NotFoundError();
       throw err;
     }
 
@@ -85,9 +80,7 @@ module.exports.deleteLike = async (req, res, next) => {
 
     res.send(updatedCard);
   } catch (err) {
-    // if ((err.name = constants.CastError)) {
-    //   err.name = constants.ValidationError;
-    // }
-    next(err);
+    if (err.code === 404) next(err);
+    else next(new ERRORS.InternalError());
   }
 };
