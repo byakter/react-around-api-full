@@ -4,12 +4,12 @@ const ERRORS = require('../utils/Errors');
 module.exports.auth = (req, res, next) => {
   const header = req.headers.authorization;
   if (!header) {
-    const err = new ERRORS.ForbiddenError();
+    const err = new ERRORS.UnauthorizedError();
     throw err;
   }
   const token = header.split(' ')[1];
   if (!token) {
-    const err = new ERRORS.ForbiddenError();
+    const err = new ERRORS.UnauthorizedError();
     throw err;
   }
   try {

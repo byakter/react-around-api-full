@@ -32,7 +32,7 @@ https://github.com/byakter/react-around-api-full.git
  Link to the website that hosts your API:
 </h4>
 
-https://www.byakter.chickenkiller.com/
+https://byakter.chickenkiller.com/
 
 <h3>
 Languages & Techniques

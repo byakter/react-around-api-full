@@ -18,9 +18,15 @@ router.patch('/me', celebrate({
     about: Joi.string().required().min(2).max(30),
   }),
 }), ctl.updateProfile);
+// router.patch('/me/avatar', celebrate({
+//   body: Joi.object().keys({
+//     avatar: Joi.link().required(),
+//   }),
+// }), ctl.updateAvatar);
+
 router.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
-    avatar: Joi.link().required(),
+    avatar: Joi.string().required().pattern(/^(https?|ftp):\/\/[^s/$.?#].[^s]*$/),
   }),
 }), ctl.updateAvatar);
 
