@@ -52,9 +52,9 @@ module.exports.createUser = async (req, res, next) => {
       name, about, avatar, email, password: hashPassword,
     });
     const saveUser = await createdUser.save();
-    // const { password: p, ...user } = saveUser;
-    delete saveUser.password;
-    res.send(saveUser);
+    const withouPassword = saveUser.toObject();
+    delete withouPassword.password;
+    res.send(withouPassword);
   } catch (error) {
     if (error.code === 11000) {
       next(new ERRORS.Conflict());
