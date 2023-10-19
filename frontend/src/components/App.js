@@ -68,7 +68,7 @@ function App({ setCurrrentUser }) {
     api
       .getInitialCards()
       .then((items) => {
-        setCards(items.data);
+        setCards(items);
       })
       .catch((error) => {
         console.log("Error fetching user data:", error);

@@ -52,8 +52,9 @@ const Login = (props) => {
     api
       .getUserInfo()
       .then((userInfo) => {
-        props.setCurrrentUser(userInfo.data);
+        props.setCurrrentUser(userInfo);
         history.push("/");
+        console.log(userInfo);
         console.log(context);
       })
       .catch((error) => {
@@ -97,7 +98,7 @@ const Login = (props) => {
         </button>
       </form>
       <div className="auth__footer">
-        <p className="auth__footer-text">Already a member?</p>
+        <p className="auth__footer-text">Not a member yet?</p>
         <Link to="/signup" className="auth__login-link">
           Sign up here
         </Link>

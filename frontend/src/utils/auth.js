@@ -19,7 +19,8 @@ class Auth extends Api{
 }
 
 export const auth = new Auth({
-    baseUrl: "https://byakter.chickenkiller.com",
+    baseUrl: "https://api.byakter.chickenkiller.com",
+    // baseUrl:'http://localhost:5000',
     headers: {
       authorization: "5dce2cef-3614-4677-836d-e6e3b236af3f",
       "Content-Type": "application/json",

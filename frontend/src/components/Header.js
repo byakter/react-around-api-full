@@ -11,7 +11,7 @@ const Header = (props) => {
       <img className="header__logo" src={logo} alt="around-the-us-logo" />
       <div className="header__content">
         {" "}
-        {context.user.email && (
+        {context.user?.email && (
           <p className="header__user-info">{context.user.email}</p>
         )}
         <Link

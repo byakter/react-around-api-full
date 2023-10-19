@@ -51,7 +51,8 @@ const Routes = () => {
   }, [history]);
 
   useEffect(() => {
-    if (currentUser.email) setLogout();
+
+    if (currentUser?.email) setLogout();
     else autoLogin();
   }, [currentUser, autoLogin]);
 
@@ -64,7 +65,7 @@ const Routes = () => {
             <Login setCurrrentUser={setCurrrentUser} />
           </Route>
           <Route path="/signup" component={Register} />
-          <ProtectedRoute loggedIn={currentUser.email !== undefined}>
+          <ProtectedRoute loggedIn={currentUser?.email}>
             <App setCurrrentUser={setCurrrentUser} />
           </ProtectedRoute>
 

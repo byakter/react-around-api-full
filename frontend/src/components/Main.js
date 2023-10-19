@@ -63,7 +63,7 @@ const Main = ({
       </section>
 
       <section className="cards">
-        {cards.map((card) => {
+        {cards?.map((card) => {
           return (
             <Card
               card={card}
