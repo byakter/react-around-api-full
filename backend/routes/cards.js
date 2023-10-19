@@ -26,7 +26,7 @@ router.delete('/:id', celebrate({
 router.post('/', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    link: Joi.string().required().pattern(/^(https?|ftp):\/\/[^s/$.?#].[^s]*$/),
+    link: Joi.string().required(), // .pattern(/^(https?|ftp):\/\/[^s/$.?#].[^s]*$/),
   }),
 }), createCard);
 router.put('/:cardId/likes', celebrate({
