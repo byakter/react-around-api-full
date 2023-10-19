@@ -29,6 +29,7 @@ module.exports.getUserById = (req, res, next) => {
 
 module.exports.getUserData = (req, res, next) => {
   const { _id } = req.user;
+
   User.findById(_id)
     .orFail(() => {
       const err = new ERRORS.NotFoundError('No card found with that id');
