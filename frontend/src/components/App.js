@@ -62,7 +62,7 @@ function App({ setCurrrentUser }) {
       handelClose();
     }
   };
-  
+
 
   useEffect(() => {
     api
@@ -79,7 +79,7 @@ function App({ setCurrrentUser }) {
     api
       .setUserInfo(user)
       .then((updateUser) => {
-        setCurrrentUser(updateUser.data);
+        setCurrrentUser(updateUser);
 
         closeAllPopups();
       })
@@ -92,7 +92,7 @@ function App({ setCurrrentUser }) {
     api
       .changeProfileImage(avatarData)
       .then((updatedUser) => {
-        setCurrrentUser(updatedUser.data);
+        setCurrrentUser(updatedUser);
 
         closeAllPopups();
       })
@@ -108,7 +108,7 @@ function App({ setCurrrentUser }) {
         .then((newCard) => {
           setCards((state) =>
             state.map((currentCard) =>
-              currentCard._id === card._id ? newCard.data : currentCard
+              currentCard._id === card._id ? newCard : currentCard
             )
           );
         })
@@ -121,7 +121,7 @@ function App({ setCurrrentUser }) {
         .then((newCard) => {
           setCards((state) =>
             state.map((currentCard) =>
-              currentCard._id === card._id ? newCard.data : currentCard
+              currentCard._id === card._id ? newCard : currentCard
             )
           );
         })
@@ -154,7 +154,7 @@ function App({ setCurrrentUser }) {
     api
       .createCard(newCard)
       .then((savedCard) => {
-        setCards([savedCard.data, ...cards]);
+        setCards([savedCard, ...cards]);
         closeAllPopups();
       })
       .catch((error) => {
